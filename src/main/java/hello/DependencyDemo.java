@@ -4,9 +4,11 @@ import edu.stanford.nlp.coref.data.DocumentPreprocessor;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.parser.nndep.DependencyParser;
+import edu.stanford.nlp.process.WhitespaceTokenizer;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.util.logging.Redwood;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.StringReader;
@@ -15,26 +17,28 @@ import java.util.List;
 @Component
 public class DependencyDemo {
 
-    private static Redwood.RedwoodChannels log = Redwood.channels(DependencyDemo.class);
+
+    public DependencyParser depParser;
+    public MaxentTagger tagger;
 
 
-    public final DependencyParser depParser;
-
-    public DependencyDemo(DependencyParser depParser) { this.depParser = depParser; }
-
-    public final MaxentTagger tagger;
-
-    public DependencyDemo(MaxentTagger tagger) {this.tagger = tagger;}
+    public DependencyDemo(DependencyParser depParser, MaxentTagger tagger) {
+        this.depParser = depParser;
+        this.tagger = tagger;
+    }
 
 
-    public String returnDeps(String sentence) {
-        DocumentPreprocessor tokenizer = new DocumentPreprocessor(new StringReader(sentence));
+    public String returnDeps(String rawText) {
+        edu.stanford.nlp.process.DocumentPreprocessor tokenizer = new edu.stanford.nlp.process.DocumentPreprocessor(new StringReader(rawText));
 
-        List<TaggedWord> tagged = tagger.tagSentence(tokenizer.toString());
+        final StringBuffer typeDependencies = new StringBuffer();
+
+        for (List<HasWord> sentence : tokenizer) {
+            List<TaggedWord> tagged = tagger.tagSentence(sentence);
             GrammaticalStructure gs = depParser.predict(tagged);
-
-            // Print typed dependencies
-            return gs.toString());
+            typeDependencies.append(gs.toString());
+        }
+        return typeDependencies.toString();
     }
 
 

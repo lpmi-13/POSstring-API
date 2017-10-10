@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/relation")
 public class RelationExtractorController {
+
     @Autowired
     public RelationExtractor extractor;
 
