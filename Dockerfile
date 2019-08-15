@@ -8,4 +8,6 @@ WORKDIR /api
 
 COPY . ./
 
-RUN mvn install && mvn spring-boot:run
+RUN mvn install 
+
+CMD mvn spring-boot:run

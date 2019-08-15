@@ -1,6 +1,16 @@
 # POS String API
 
-setting up (on linux)
+## Setup (easy version with Docker)
+
+`docker build -t NAME_OF_YOUR_CONTAINER .`
+
+...then
+
+`docker run -p 8080:8080 NAME_OF_YOUR_CONTAINER`
+
+## Setup (non-easy version without Docker)
+
+(do the usual java installation steps, involving setting the JAVA_HOME, etc...)
 
 `apt install maven -y`
 
@@ -15,6 +25,8 @@ set up dependencies
 `mvn spring-boot:run`
 
 run the API
+
+## using the API
 
 ...the service should now be available to query on port 8080 like so:
 
