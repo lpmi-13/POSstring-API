@@ -10,4 +10,4 @@ COPY . ./
 
 RUN mvn install 
 
-CMD mvn spring-boot:run
+CMD ["mvn", "spring-boot:run"]
