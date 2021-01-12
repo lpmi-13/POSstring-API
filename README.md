@@ -32,9 +32,11 @@ run the API
 
 ### POS tagging (part of speech tagging)
 
+visiting:
+
 `localhost:8080/pos?sentence=this is an example sentence`
 
-should return
+in your browser should return a basic page showing
 
 `(ROOT (S (NP (DT this)) (VP (VBZ is) (NP (DT an) (NN example) (NN sentence)))))`
 
@@ -42,15 +44,17 @@ should return
 
 `localhost:8080/ner?sentence=Obama is a celebrity in Kenya and Indonesia`
 
-should return
+should show
 
 `Obama/PERSON is/O a/O celebrity/O in/O Kenya/LOCATION and/O Indonesia/LOCATION`
 
 ### Dependency parsing (syntactical roles/relationships of different words in a sentence)
 
+visiting:
+
 `localhost:8080/dependency?sentence=this sentence which I am typing has a few dependencies`
 
-should return
+should show
 
 `ROOT-0{CharacterOffsetBeginAnnotation=-1, CharacterOffsetEndAnnotation=-1, PartOfSpeechAnnotation=null, TextAnnotation=ROOT}Typed Dependencies: [det(sentence-2, this-1), root(ROOT-0, sentence-2), dobj(typing-6, which-3), nsubj(typing-6, I-4), cop(typing-6, am-5), acl:relcl(sentence-2, typing-6), ccomp(typing-6, has-7), det(dependencies-10, a-8), amod(dependencies-10, few-9), dobj(has-7, dependencies-10)]`
 
